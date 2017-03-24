@@ -1,7 +1,7 @@
 export const firebaseConfig = {
-  apiKey: 'AIzaSyA8Pa3euWVVG7FcQ3BRirXyFBkr7U4-V9Q',
-  authDomain: 'mindmolders-be2df.firebaseapp.com',
-  databaseURL: 'https://mindmolders-be2df.firebaseio.com',
-  storageBucket: 'mindmolders-be2df.appspot.com',
-  messagingSenderId: '494950301395'
+  apiKey: 'AIzaSyB3emFsoDUntaWqxQ3Fbjaj85jJd4VZA7k',
+  authDomain: 'mindmolders-36999.firebaseapp.com',
+  databaseURL: 'https://mindmolders-36999.firebaseio.com',
+  storageBucket: 'mindmolders-36999.appspot.com',
+  messagingSenderId: '10551892232'
 };

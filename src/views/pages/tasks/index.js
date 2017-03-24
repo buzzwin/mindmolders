@@ -59,7 +59,7 @@ export class Tasks extends Component {
     return (
       <div className="g-row">
         <div className="g-col">
-        {/*  <TaskForm createTask={this.props.createTask} /> */}
+          {/* <TaskForm createTask={this.props.createTask} /> */}
         </div>
 
         <div className="g-col">
