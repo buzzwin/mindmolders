@@ -2,14 +2,12 @@ import { isAuthenticated } from 'src/core/auth';
 import App from './app';
 import SignIn from './pages/sign-in';
 import Tasks from './pages/tasks';
-import Mentors from './pages/mentors';
 
 
 export const paths = {
   ROOT: '/',
   SIGN_IN: '/sign-in',
-  TASKS: '/',
-  MENTORS: '/'
+  TASKS: '/'
 };
 
 
@@ -24,10 +22,11 @@ const requireAuth = getState => {
 const requireUnauth = getState => {
   return (nextState, replace) => {
     if (isAuthenticated(getState())) {
-      replace(paths.MENTORS);
+      replace(paths.TASKS);
     }
   };
 };
+
 
 export const getRoutes = getState => {
   return {
@@ -36,18 +35,13 @@ export const getRoutes = getState => {
     childRoutes: [
       {
         indexRoute: {
-          component: Mentors,
+          component: Tasks,
           onEnter: requireAuth(getState)
         }
       },
       {
         path: paths.SIGN_IN,
         component: SignIn,
-        onEnter: requireUnauth(getState)
-      },
-      {
-        path: paths.TASKS,
-        component: Tasks,
         onEnter: requireUnauth(getState)
       }
     ]

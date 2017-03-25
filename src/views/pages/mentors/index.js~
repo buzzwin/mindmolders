@@ -4,49 +4,49 @@ import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 
 import { getNotification, notificationActions } from 'src/core/notification';
-import { getTaskFilter, getVisibleTasks, tasksActions } from 'src/core/tasks';
+import { getMentorFilter, getVisibleMentors, mentorsActions } from 'src/core/mentors';
 import Notification from '../../components/notification';
-import TaskFilters from '../../components/task-filters';
+import MentorFilters from '../../components/mentor-filters';
+import MentorForm from '../../components/mentor-form';
+import MentorList from '../../components/mentor-list';
 
-import TaskList from '../../components/task-list';
 
-
-export class Tasks extends Component {
+export class Mentors extends Component {
   static propTypes = {
-    createTask: PropTypes.func.isRequired,
-    deleteTask: PropTypes.func.isRequired,
+    createMentor: PropTypes.func.isRequired,
+    deleteMentor: PropTypes.func.isRequired,
     dismissNotification: PropTypes.func.isRequired,
-    filterTasks: PropTypes.func.isRequired,
+    filterMentors: PropTypes.func.isRequired,
     filterType: PropTypes.string.isRequired,
-    loadTasks: PropTypes.func.isRequired,
+    loadMentors: PropTypes.func.isRequired,
     location: PropTypes.object.isRequired,
     notification: PropTypes.object.isRequired,
-    tasks: PropTypes.instanceOf(List).isRequired,
-    undeleteTask: PropTypes.func.isRequired,
-    unloadTasks: PropTypes.func.isRequired,
-    updateTask: PropTypes.func.isRequired
+    mentors: PropTypes.instanceOf(List).isRequired,
+    undeleteMentor: PropTypes.func.isRequired,
+    unloadMentors: PropTypes.func.isRequired,
+    updateMentor: PropTypes.func.isRequired
   };
 
   componentWillMount() {
-    this.props.loadTasks();
-    this.props.filterTasks(this.props.location.query.filter);
+    this.props.loadMentors();
+    this.props.filterMentors(this.props.location.query.filter);
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.location.query.filter !== this.props.location.query.filter) {
-      this.props.filterTasks(nextProps.location.query.filter);
+      this.props.filterMentors(nextProps.location.query.filter);
     }
   }
 
   componentWillUnmount() {
-    this.props.unloadTasks();
+    this.props.unloadMentors();
   }
 
   renderNotification() {
     const { notification } = this.props;
     return (
       <Notification
-        action={this.props.undeleteTask}
+        action={this.props.undeleteMentor}
         actionLabel={notification.actionLabel}
         dismiss={this.props.dismissNotification}
         display={notification.display}
@@ -59,16 +59,15 @@ export class Tasks extends Component {
     return (
       <div className="g-row">
         <div className="g-col">
-          {/* <TaskForm createTask={this.props.createTask} /> */}
-          <p>Hello</p>
+           <MentorForm createMentor={this.props.createMentor} />
         </div>
 
         <div className="g-col">
-          <TaskFilters filter={this.props.filterType} />
-          <TaskList
-            deleteTask={this.props.deleteTask}
-            tasks={this.props.tasks}
-            updateTask={this.props.updateTask}
+          <MentorFilters filter={this.props.filterType} />
+          <MentorList
+            deleteMentor={this.props.deleteMentor}
+            mentors={this.props.mentors}
+            updateMentor={this.props.updateMentor}
           />
         </div>
 
@@ -85,22 +84,22 @@ export class Tasks extends Component {
 
 const mapStateToProps = createSelector(
   getNotification,
-  getTaskFilter,
-  getVisibleTasks,
-  (notification, filterType, tasks) => ({
+  getMentorFilter,
+  getVisibleMentors,
+  (notification, filterType, mentors) => ({
     notification,
     filterType,
-    tasks
+    mentors
   })
 );
 
 const mapDispatchToProps = Object.assign(
   {},
-  tasksActions,
+  mentorsActions,
   notificationActions
 );
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Tasks);
+)(Mentors);

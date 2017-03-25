@@ -36,8 +36,6 @@
   li {
     float: left;
     list-style: none;
-    margin-left: 12px;
-    padding-left: 12px;
 
     &:last-child {
       margin-left: 12px;
@@ -67,44 +65,10 @@
     transform: translate(0,0);
   }
 
- .link--user {
-    @include fa-icon(user);
-    font-size: rem(24px);
-    
 
-    &:before {
-      font-family: 'FontAwesome';
-      line-height: 24px;
-    }
-  }
-  
-   .link--bell {
-    @include fa-icon(bell);
-    font-size: rem(24px);
-    
-
-    &:before {
-      font-family: 'FontAwesome';
-      line-height: 24px;
-    }
-  }
-  
-    .link--calendar {
-    @include fa-icon(calendar);
-    font-size: rem(24px);
-    
-
-    &:before {
-      font-family: 'FontAwesome';
-      line-height: 24px;
-    }
-  }
-  
-  
   .link--github {
     @include fa-icon(users);
     font-size: rem(24px);
-    
 
     &:before {
       font-family: 'FontAwesome';

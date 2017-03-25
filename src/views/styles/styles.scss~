@@ -17,11 +17,7 @@
 "task-filters",
 "task-form",
 "task-item",
-"task-list",
-"mentor-filters",
-"mentor-form",
-"mentor-item",
-"mentor-list";
+"task-list";
 
 
 html {
