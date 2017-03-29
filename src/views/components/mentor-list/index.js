@@ -15,8 +15,7 @@ function MentorList({deleteMentor, mentors, updateMentor}) {
         updateMentor={updateMentor}
       />
     );
-
-    });
+  });
 
   return (
     <div className="mentor-list">
