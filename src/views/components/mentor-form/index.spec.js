@@ -34,13 +34,7 @@ describe('MentorForm', () => {
     });
 
 
-    describe('#onChange', () => {
-      it('should set #state.title with event.target.value', () => {
-        const event = {target: {value: 'value'}};
-        mentorForm.onChange(event);
-        expect(mentorForm.state.title).toEqual(event.target.value);
-      });
-    });
+
 
 
     describe('#onKeyUp', () => {

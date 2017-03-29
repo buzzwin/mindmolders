@@ -128,19 +128,6 @@ describe('MentorItem', () => {
     });
 
 
-    describe('title', () => {
-      it('should be rendered as a text input field when editing', () => {
-        mentorItem.setState({editing: true});
-        let element = mentorItem.titleInput;
-        expect(element.tagName).toEqual('INPUT');
-      });
-
-      it('should be rendered as text when not editing', () => {
-        mentorItem.setState({editing: false});
-        let element = mentorItem.titleText;
-        expect(element.innerText).toEqual(mentor.title);
-      });
-    });
 
 
     describe('`blur` event triggered on text field', () => {

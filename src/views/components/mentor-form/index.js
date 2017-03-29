@@ -21,17 +21,13 @@ class MentorForm extends Component {
   }
 
   onChange(event) {
-   
-   if (event.target.id == "position")
-    {
-     this.setState({position: event.target.value });
+    if (event.target.id === 'position') {
+      this.setState({position: event.target.value });
     }
-   else if (event.target.id == "title")
-    {
+    else if (event.target.id === 'title') {
       this.setState({title: event.target.value });
     }
-     else if (event.target.id == "organization")
-    {
+    else if (event.target.id === 'organization') {
       this.setState({organization: event.target.value });
     }
   }
@@ -47,7 +43,6 @@ class MentorForm extends Component {
     const title = this.state.title.trim();
     const position = this.state.position.trim();
     const organization = this.state.organization.trim();
-    
     if (title.length) this.props.createMentor(title, position, organization);
     this.clearInput();
   }
@@ -56,7 +51,7 @@ class MentorForm extends Component {
     return (
       <form className="mentor-form" onSubmit={this.onSubmit} noValidate>
         <input
-          id = "title"
+          id="title"
           autoComplete="off"
           autoFocus
           className="mentor-form__input"
@@ -69,7 +64,7 @@ class MentorForm extends Component {
           value={this.state.title}
         />
         <input
-          id = "position"
+          id="position"
           autoComplete="off"
           autoFocus
           className="mentor-form__input"
@@ -81,8 +76,8 @@ class MentorForm extends Component {
           type="text"
           value={this.state.position}
         />
-         <input
-          id = "organization"
+        <input
+          id="organization"
           autoComplete="off"
           autoFocus
           className="mentor-form__input"

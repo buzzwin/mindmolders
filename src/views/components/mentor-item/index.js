@@ -76,30 +76,27 @@ class MentorItem extends Component {
       </div>
     );
   }
-  
+
   renderMentor(mentor) {
-  	 
     return (
-    <div>
-      <div
+      <div>
+        <div
         className="mentor-item__title"
         ref={c => this.titleText = c}
         tabIndex="0">{mentor.title}
-      </div>
-      &nbsp;
-      <div
+        </div>
+        &nbsp;
+        <div
         className="mentor-item__position"
         ref={c => this.titleText = c}
         tabIndex="0">{mentor.position}
-      </div>
-       <div
+        </div>
+        <div
         className="mentor-item__position"
         ref={c => this.titleText = c}
         tabIndex="0">{mentor.organization}
+        </div>
       </div>
-      
-     </div>
-      
     );
   }
 
@@ -118,11 +115,9 @@ class MentorItem extends Component {
       />
     );
   }
-  
+
   renderMentorInput(mentor) {
-  	
     return (
-    	    
     <div>
       <input
         autoComplete="off"

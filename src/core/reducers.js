@@ -11,5 +11,5 @@ export default combineReducers({
   notification: notificationReducer,
   routing: routerReducer,
   tasks: tasksReducer,
-  mentors: mentorsReducer,
+  mentors: mentorsReducer
 });

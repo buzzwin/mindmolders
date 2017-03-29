@@ -18,6 +18,7 @@ export class FirebaseList {
 
   push(value) {
     return new Promise((resolve, reject) => {
+      console.log(this._path);
       firebaseDb.ref(this._path)
         .push(value, error => error ? reject(error) : resolve());
     });
@@ -49,8 +50,12 @@ export class FirebaseList {
     let initialized = false;
     let list = [];
 
+
+
+
     ref.once('value', () => {
       initialized = true;
+
       emit(this._actions.onLoad(list));
     });
 

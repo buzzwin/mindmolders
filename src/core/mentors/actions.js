@@ -1,5 +1,7 @@
 import { getDeletedMentor } from './selectors';
 import { mentorList } from './mentor-list';
+import { firebaseDb } from '../firebase/firebase';
+
 import {
   CREATE_MENTOR_ERROR,
   CREATE_MENTOR_SUCCESS,
@@ -14,11 +16,26 @@ import {
 } from './action-types';
 
 
-export function createMentor(title, position,organization) {
-  return dispatch => {
-    mentorList.push({completed: false, title, position, organization})
+export function createMentor(title, position, organization) {
+  return (dispatch, getState) => {
+    const { auth } = getState();
+    mentorList.push({userUID: auth.id, completed: false, title, position, organization})
       .catch(error => dispatch(createMentorError(error)));
   };
+}
+
+export function createMentorBackup(title, position, organization) {
+return (dispatch, getState) => {
+  const { auth } = getState();
+    firebaseDb.ref('mentors').set({
+      userUID: auth.id,
+      title: title,
+      position: position,
+      organization : organization,
+      completed : false
+    }).catch(error => dispatch(createMentorError(error)));
+  };
+
 }
 
 export function createMentorError(error) {
@@ -60,8 +77,8 @@ export function undeleteMentor() {
   return (dispatch, getState) => {
     const mentor = getDeletedMentor(getState());
     if (mentor) {
-      mentorList.set(mentor.key, {completed: mentor.completed, title: mentor.title})
-        .catch(error => dispatch(undeleteMentorError(error)));
+      //mentorList.set(mentor.key, {completed: mentor.completed, title: mentor.title})
+      //  .catch(error => dispatch(undeleteMentorError(error)));
     }
   };
 }
@@ -82,8 +99,8 @@ export function updateMentorError(error) {
 
 export function updateMentor(mentor, changes) {
   return dispatch => {
-    mentorList.update(mentor.key, changes)
-      .catch(error => dispatch(updateMentorError(error)));
+    //mentorList.update(mentor.key, changes)
+      //.catch(error => dispatch(updateMentorError(error)));
   };
 }
 
@@ -111,13 +128,14 @@ export function filterMentors(filterType) {
 export function loadMentors() {
   return (dispatch, getState) => {
     const { auth } = getState();
-    mentorList.path = `mentors/${auth.id}`;
+    {/*mentorList.path = `mentors/${auth.id}`;*/}
+    mentorList.path = `mentors`;
     mentorList.subscribe(dispatch);
   };
 }
 
 export function unloadMentors() {
-  mentorList.unsubscribe();
+  //mentorList.unsubscribe();
   return {
     type: UNLOAD_MENTORS_SUCCESS
   };

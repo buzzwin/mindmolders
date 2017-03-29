@@ -7,7 +7,6 @@ import { getNotification, notificationActions } from 'src/core/notification';
 import { getMentorFilter, getVisibleMentors, mentorsActions } from 'src/core/mentors';
 import Notification from '../../components/notification';
 import MentorFilters from '../../components/mentor-filters';
-
 import MentorList from '../../components/mentor-list';
 
 

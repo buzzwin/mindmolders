@@ -1,23 +1,23 @@
 import { Simulate } from 'react-addons-test-utils';
 import { findDOMNode } from 'react-dom';
 import { createTestComponent } from 'test/utils';
-import TaskForm from './index';
+import MentorForm from './index';
 
 
-describe('TaskForm', () => {
-  let taskForm;
+describe('MentorForm', () => {
+  let mentorForm;
 
 
   beforeEach(() => {
-    taskForm = createTestComponent(TaskForm, {
-      createTask: sinon.spy()
+    mentorForm = createTestComponent(MentorForm, {
+      createMentor: sinon.spy()
     });
   });
 
 
   describe('Instantiation:', () => {
     it('should set #state.title with an empty string', () => {
-      expect(taskForm.state.title).toEqual('');
+      expect(mentorForm.state.title).toEqual('');
     });
   });
 
@@ -25,11 +25,11 @@ describe('TaskForm', () => {
   describe('Component methods:', () => {
     describe('#clearInput', () => {
       it('should set #state.title with an empty string', () => {
-        taskForm.state.title = 'foo';
-        expect(taskForm.state.title).toEqual('foo');
+        mentorForm.state.title = 'foo';
+        expect(mentorForm.state.title).toEqual('foo');
 
-        taskForm.clearInput();
-        expect(taskForm.state.title).toEqual('');
+        mentorForm.clearInput();
+        expect(mentorForm.state.title).toEqual('');
       });
     });
 
@@ -37,8 +37,8 @@ describe('TaskForm', () => {
     describe('#onChange', () => {
       it('should set #state.title with event.target.value', () => {
         const event = {target: {value: 'value'}};
-        taskForm.onChange(event);
-        expect(taskForm.state.title).toEqual(event.target.value);
+        mentorForm.onChange(event);
+        expect(mentorForm.state.title).toEqual(event.target.value);
       });
     });
 
@@ -46,9 +46,9 @@ describe('TaskForm', () => {
     describe('#onKeyUp', () => {
       describe('with escape key', () => {
         it('should set #state.title with an empty string', () => {
-          taskForm.state.title = 'foo';
-          taskForm.onKeyUp({keyCode: 27});
-          expect(taskForm.state.title).toEqual('');
+          mentorForm.state.title = 'foo';
+          mentorForm.onKeyUp({keyCode: 27});
+          expect(mentorForm.state.title).toEqual('');
         });
       });
     });
@@ -57,41 +57,41 @@ describe('TaskForm', () => {
     describe('#onSubmit', () => {
       it('should prevent the default action of the event', () => {
         const event = {preventDefault: sinon.spy()};
-        taskForm.onSubmit(event);
+        mentorForm.onSubmit(event);
         expect(event.preventDefault.callCount).toEqual(1);
       });
 
-      it('should call taskActions#createTask with #state.title', () => {
+      it('should call mentorActions#createMentor with #state.title', () => {
         const event = {preventDefault: sinon.spy()};
 
-        taskForm.state.title = 'foo';
-        taskForm.onSubmit(event);
+        mentorForm.state.title = 'foo';
+        mentorForm.onSubmit(event);
 
-        expect(taskForm.props.createTask.callCount).toEqual(1);
-        expect(taskForm.props.createTask.calledWith('foo')).toEqual(true);
+        expect(mentorForm.props.createMentor.callCount).toEqual(1);
+        expect(mentorForm.props.createMentor.calledWith('foo')).toEqual(true);
       });
 
       it('should set #state.title with an empty string', () => {
         const event = {preventDefault: sinon.spy()};
 
-        taskForm.state.title = 'foo';
-        taskForm.onSubmit(event);
+        mentorForm.state.title = 'foo';
+        mentorForm.onSubmit(event);
 
-        expect(taskForm.state.title).toEqual('');
+        expect(mentorForm.state.title).toEqual('');
       });
 
       it('should not save if title evaluates to an empty string', () => {
         const event = {preventDefault: sinon.spy()};
 
-        taskForm.state.title = '';
-        taskForm.onSubmit(event);
+        mentorForm.state.title = '';
+        mentorForm.onSubmit(event);
 
-        expect(taskForm.props.createTask.callCount).toBe(0);
+        expect(mentorForm.props.createMentor.callCount).toBe(0);
 
-        taskForm.state.title = '    ';
-        taskForm.onSubmit(event);
+        mentorForm.state.title = '    ';
+        mentorForm.onSubmit(event);
 
-        expect(taskForm.props.createTask.callCount).toBe(0);
+        expect(mentorForm.props.createMentor.callCount).toBe(0);
       });
     });
   });
@@ -100,25 +100,25 @@ describe('TaskForm', () => {
   describe('DOM:', () => {
     describe('`keyup` event triggered on text field with escape key', () => {
       it('should set #state.title with an empty string', () => {
-        taskForm.setState({title: 'foo'});
-        Simulate.keyUp(taskForm.titleInput, {keyCode: 27});
-        expect(taskForm.state.title).toEqual('');
+        mentorForm.setState({title: 'foo'});
+        Simulate.keyUp(mentorForm.titleInput, {keyCode: 27});
+        expect(mentorForm.state.title).toEqual('');
       });
 
       it('should set text field value with an empty string', () => {
-        taskForm.setState({title: 'foo'});
-        Simulate.keyUp(taskForm.titleInput, {keyCode: 27});
-        expect(taskForm.titleInput.value).toEqual('');
+        mentorForm.setState({title: 'foo'});
+        Simulate.keyUp(mentorForm.titleInput, {keyCode: 27});
+        expect(mentorForm.titleInput.value).toEqual('');
       });
     });
 
 
     describe('`change` event triggered on text field', () => {
       it('should set #state.title with the value from the text field', () => {
-        taskForm.titleInput.value = 'foo';
-        expect(taskForm.state.title).toEqual('');
-        Simulate.change(taskForm.titleInput);
-        expect(taskForm.state.title).toEqual('foo');
+        mentorForm.titleInput.value = 'foo';
+        expect(mentorForm.state.title).toEqual('');
+        Simulate.change(mentorForm.titleInput);
+        expect(mentorForm.state.title).toEqual('foo');
       });
     });
 
@@ -126,15 +126,15 @@ describe('TaskForm', () => {
     describe('`submit` event triggered on form', () => {
       it('should prevent the default action of the event', () => {
         const event = {preventDefault: sinon.spy()};
-        Simulate.submit(findDOMNode(taskForm), event);
+        Simulate.submit(findDOMNode(mentorForm), event);
         expect(event.preventDefault.callCount).toEqual(1);
       });
 
       it('should set text field value with an empty string', () => {
         const event = {preventDefault: sinon.spy()};
-        taskForm.setState({title: 'foo'});
-        Simulate.submit(findDOMNode(taskForm), event);
-        expect(taskForm.titleInput.value).toEqual('');
+        mentorForm.setState({title: 'foo'});
+        Simulate.submit(findDOMNode(mentorForm), event);
+        expect(mentorForm.titleInput.value).toEqual('');
       });
     });
   });

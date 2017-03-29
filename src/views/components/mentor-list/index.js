@@ -4,6 +4,8 @@ import MentorItem from '../mentor-item';
 
 
 function MentorList({deleteMentor, mentors, updateMentor}) {
+
+
   let mentorItems = mentors.map((mentor, index) => {
     return (
       <MentorItem
@@ -13,7 +15,8 @@ function MentorList({deleteMentor, mentors, updateMentor}) {
         updateMentor={updateMentor}
       />
     );
-  });
+
+    });
 
   return (
     <div className="mentor-list">
