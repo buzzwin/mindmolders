@@ -14,6 +14,7 @@ class MentorItem extends Component {
     super(props, context);
 
     this.state = {editing: false};
+    this.state = {showDetails: false};
 
     this.delete = ::this.delete;
     this.editTitle = ::this.editTitle;
@@ -21,6 +22,7 @@ class MentorItem extends Component {
     this.stopEditing = ::this.stopEditing;
     this.toggleStatus = ::this.toggleStatus;
     this.onKeyUp = ::this.onKeyUp;
+    this.showDetails = ::this.showDetails;
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -35,7 +37,12 @@ class MentorItem extends Component {
   editTitle() {
     this.setState({editing: true});
   }
-
+  showDetails() {
+    this.setState({showDetails: true});
+  }
+  renderDetails() {
+    this.setState({showDetails: false});
+  }
   saveTitle(event) {
     if (this.state.editing) {
       const { mentor } = this.props;
@@ -159,7 +166,7 @@ class MentorItem extends Component {
             onClick={this.toggleStatus}
             ref={c => this.toggleStatusButton = c}
             type="button">
-            <svg className={classNames('icon', {'icon--active': mentor.completed})} width="24" height="24" viewBox="0 0 24 24">
+            <svg className={classNames('fa-icon fa-info-circle', {'icon--active': mentor.completed})} width="24" height="24" viewBox="0 0 24 24">
               <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z" />
             </svg>
           </button>
@@ -170,40 +177,18 @@ class MentorItem extends Component {
         </div>
 
         <div className="cell">
+
           <button
-            aria-hidden={!editing}
-            aria-label="Cancel editing"
-            className={classNames('btn mentor-item__button', {'hide': !editing})}
-            onClick={this.stopEditing}
-            ref={c => this.cancelEditButton = c}
-            type="button">
-            <svg className="icon" width="24" height="24" viewBox="0 0 24 24">
-              <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
-              <path d="M0 0h24v24H0z" fill="none"></path>
-            </svg>
-          </button>
-          <button
-            aria-hidden={editing}
-            aria-label="Edit mentor"
+            aria-label="Show Mentors Detail"
             className={classNames('btn mentor-item__button', {'hide': editing})}
-            onClick={this.editTitle}
-            ref={c => this.editButton = c}
+            onClick={this.showDetails}
+            ref={c => this.detailsButton = c}
             type="button">
-            <svg className="icon" width="24" height="24" viewBox="0 0 24 24">
-              <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" />
+            <svg className="icon" width="40" height="40" viewBox="0 0 40 40">
+            <path d="m25.9 30.7v-3.6q0-0.3-0.2-0.5t-0.6-0.2h-2.1v-11.4q0-0.3-0.2-0.5t-0.5-0.2h-7.2q-0.3 0-0.5 0.2t-0.2 0.5v3.6q0 0.3 0.2 0.5t0.5 0.2h2.2v7.1h-2.2q-0.3 0-0.5 0.2t-0.2 0.5v3.6q0 0.3 0.2 0.5t0.5 0.2h10q0.4 0 0.6-0.2t0.2-0.5z m-2.9-20v-3.6q0-0.3-0.2-0.5t-0.5-0.2h-4.3q-0.3 0-0.5 0.2t-0.2 0.5v3.6q0 0.3 0.2 0.5t0.5 0.2h4.3q0.3 0 0.5-0.2t0.2-0.5z m14.3 9.3q0 4.7-2.3 8.6t-6.3 6.2-8.6 2.3-8.6-2.3-6.2-6.2-2.3-8.6 2.3-8.6 6.2-6.2 8.6-2.3 8.6 2.3 6.3 6.2 2.3 8.6z"></path>
             </svg>
           </button>
-          <button
-            aria-hidden={editing}
-            aria-label="Delete mentor"
-            className={classNames('btn mentor-item__button', {'hide': editing})}
-            onClick={this.delete}
-            ref={c => this.deleteButton = c}
-            type="button">
-            <svg className="icon" width="24" height="24" viewBox="0 0 24 24">
-              <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z" />
-            </svg>
-          </button>
+
         </div>
       </div>
     );
