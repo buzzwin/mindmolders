@@ -9,7 +9,8 @@ import {
   DELETE_MENTOR_SUCCESS,
   FILTER_MENTORS,
   LOAD_MENTORS_SUCCESS,
-  UPDATE_MENTOR_SUCCESS
+  UPDATE_MENTOR_SUCCESS,
+  SHOW_DETAIL_MENTOR_SUCCESS
 } from './action-types';
 
 
@@ -17,7 +18,9 @@ export const MentorsState = new Record({
   deleted: null,
   filter: '',
   list: new List(),
-  previous: null
+  previous: null,
+  showDetails: false,
+  selectedMentor: null
 });
 
 
@@ -53,6 +56,11 @@ export function mentorsReducer(state = new MentorsState(), {payload, type}) {
           return mentor.key === payload.key ? payload : mentor;
         })
       });
+    case SHOW_DETAIL_MENTOR_SUCCESS:
+      return {
+        ...state,
+        selectedMentor: payload
+      };
 
     case SIGN_OUT_SUCCESS:
       return new MentorsState();

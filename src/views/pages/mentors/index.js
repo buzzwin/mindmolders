@@ -19,11 +19,13 @@ export class Mentors extends Component {
     filterType: PropTypes.string.isRequired,
     loadMentors: PropTypes.func.isRequired,
     location: PropTypes.object.isRequired,
+
     notification: PropTypes.object.isRequired,
     mentors: PropTypes.instanceOf(List).isRequired,
     undeleteMentor: PropTypes.func.isRequired,
     unloadMentors: PropTypes.func.isRequired,
-    updateMentor: PropTypes.func.isRequired
+    updateMentor: PropTypes.func.isRequired,
+    showDetails: PropTypes.func.isRequired
   };
 
   componentWillMount() {
@@ -36,13 +38,13 @@ export class Mentors extends Component {
       this.props.filterMentors(nextProps.location.query.filter);
     }
   }
-
   componentWillUnmount() {
     this.props.unloadMentors();
   }
 
   renderNotification() {
     const { notification } = this.props;
+
     return (
       <Notification
         action={this.props.undeleteMentor}
@@ -55,6 +57,7 @@ export class Mentors extends Component {
   }
 
   render() {
+
     return (
       <div className="g-row">
         <div className="g-col">
@@ -67,6 +70,7 @@ export class Mentors extends Component {
             deleteMentor={this.props.deleteMentor}
             mentors={this.props.mentors}
             updateMentor={this.props.updateMentor}
+            showDetails={this.props.showDetails}
           />
         </div>
 

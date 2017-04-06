@@ -2,6 +2,7 @@ import { getDeletedMentor } from './selectors';
 import { mentorList } from './mentor-list';
 import { firebaseDb } from '../firebase/firebase';
 
+
 import {
   CREATE_MENTOR_ERROR,
   CREATE_MENTOR_SUCCESS,
@@ -12,7 +13,8 @@ import {
   UNDELETE_MENTOR_ERROR,
   UNLOAD_MENTORS_SUCCESS,
   UPDATE_MENTOR_ERROR,
-  UPDATE_MENTOR_SUCCESS
+  UPDATE_MENTOR_SUCCESS,
+  SHOW_DETAIL_MENTOR_SUCCESS
 } from './action-types';
 
 
@@ -103,6 +105,8 @@ export function updateMentor(mentor, changes) {
   };
 }
 
+
+
 export function updateMentorSuccess(mentor) {
   return {
     type: UPDATE_MENTOR_SUCCESS,
@@ -110,12 +114,15 @@ export function updateMentorSuccess(mentor) {
   };
 }
 
+
 export function loadMentorsSuccess(mentors) {
   return {
     type: LOAD_MENTORS_SUCCESS,
     payload: mentors
   };
 }
+
+
 
 export function filterMentors(filterType) {
   return {
@@ -135,5 +142,12 @@ export function unloadMentors() {
   mentorList.unsubscribe();
   return {
     type: UNLOAD_MENTORS_SUCCESS
+  };
+}
+
+export function showDetails(mentor) {
+  return {
+    type: SHOW_DETAIL_MENTOR_SUCCESS,
+    payload: mentor
   };
 }

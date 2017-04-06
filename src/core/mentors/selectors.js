@@ -17,6 +17,14 @@ export function getDeletedMentor(state) {
   return getMentors(state).deleted;
 }
 
+export function getAuth(state) {
+  return state.auth;
+}
+
+
+
+
+
 
 //=====================================
 //  MEMOIZED SELECTORS

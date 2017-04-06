@@ -3,7 +3,7 @@ import { List } from 'immutable';
 import MentorItem from '../mentor-item';
 
 
-function MentorList({deleteMentor, mentors, updateMentor}) {
+function MentorList({deleteMentor, mentors, showDetails, updateMentor}) {
 
 
   let mentorItems = mentors.map((mentor, index) => {
@@ -13,6 +13,7 @@ function MentorList({deleteMentor, mentors, updateMentor}) {
         key={index}
         mentor={mentor}
         updateMentor={updateMentor}
+        showDetails={showDetails}
       />
     );
   });
@@ -27,7 +28,9 @@ function MentorList({deleteMentor, mentors, updateMentor}) {
 MentorList.propTypes = {
   deleteMentor: PropTypes.func.isRequired,
   mentors: PropTypes.instanceOf(List).isRequired,
-  updateMentor: PropTypes.func.isRequired
+  updateMentor: PropTypes.func.isRequired,
+  showDetails: PropTypes.func.isRequired
+
 };
 
 export default MentorList;

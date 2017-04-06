@@ -1,21 +1,23 @@
 import classNames from 'classnames';
 import React, { Component, PropTypes } from 'react';
 import { Mentor } from 'src/core/mentors';
-
+import { paths } from '../../routes';
 
 class MentorItem extends Component {
+  static contextTypes = {
+    router: React.PropTypes.object.isRequired
+  };
   static propTypes = {
     deleteMentor: PropTypes.func.isRequired,
     mentor: PropTypes.instanceOf(Mentor).isRequired,
+    showDetails: PropTypes.func.isRequired,
     updateMentor: PropTypes.func.isRequired
   };
 
   constructor(props, context) {
     super(props, context);
-
     this.state = {editing: false};
     this.state = {showDetails: false};
-
     this.delete = ::this.delete;
     this.editTitle = ::this.editTitle;
     this.saveTitle = ::this.saveTitle;
@@ -25,10 +27,6 @@ class MentorItem extends Component {
     this.showDetails = ::this.showDetails;
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    return nextProps.mentor !== this.props.mentor ||
-           nextState.editing !== this.state.editing;
-  }
 
   delete() {
     this.props.deleteMentor(this.props.mentor);
@@ -37,12 +35,17 @@ class MentorItem extends Component {
   editTitle() {
     this.setState({editing: true});
   }
+
   showDetails() {
+    this.props.showDetails(this.props.mentor);
     this.setState({showDetails: true});
+    const { router } = this.context;
+    if (this.showDetails) {
+      this.showDetails = false;
+      router.push(paths.MENTORDETAIL);
+    }
   }
-  renderDetails() {
-    this.setState({showDetails: false});
-  }
+
   saveTitle(event) {
     if (this.state.editing) {
       const { mentor } = this.props;
@@ -181,7 +184,7 @@ class MentorItem extends Component {
           <button
             aria-label="Show Mentors Detail"
             className={classNames('btn mentor-item__button', {'hide': editing})}
-            onClick={this.showDetails}
+            onClick={() => this.showDetails()}
             ref={c => this.detailsButton = c}
             type="button">
             <svg className="icon" width="40" height="40" viewBox="0 0 40 40">

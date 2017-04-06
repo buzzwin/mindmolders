@@ -20,7 +20,6 @@ export class App extends Component {
   componentWillReceiveProps(nextProps) {
     const { router } = this.context;
     const { auth } = this.props;
-
     if (auth.authenticated && !nextProps.auth.authenticated) {
       router.replace(paths.SIGN_IN);
     }

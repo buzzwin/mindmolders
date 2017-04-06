@@ -3,13 +3,15 @@ import App from './app';
 import SignIn from './pages/sign-in';
 import Tasks from './pages/tasks';
 import Mentors from './pages/mentors';
+import MentorDetail from './pages/mentordetail';
 
 
 export const paths = {
   ROOT: '/',
   SIGN_IN: '/sign-in',
   TASKS: '/',
-  MENTORS: '/'
+  MENTORS: '/',
+  MENTORDETAIL: '/mentordetail'
 };
 
 
@@ -22,6 +24,7 @@ const requireAuth = getState => {
 };
 
 const requireUnauth = getState => {
+
   return (nextState, replace) => {
     if (isAuthenticated(getState())) {
       replace(paths.MENTORS);
@@ -49,6 +52,10 @@ export const getRoutes = getState => {
         path: paths.TASKS,
         component: Tasks,
         onEnter: requireUnauth(getState)
+      },
+      {
+        path: paths.MENTORDETAIL,
+        component: MentorDetail
       }
     ]
   };
