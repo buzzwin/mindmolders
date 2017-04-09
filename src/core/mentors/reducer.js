@@ -57,10 +57,12 @@ export function mentorsReducer(state = new MentorsState(), {payload, type}) {
         })
       });
     case SHOW_DETAIL_MENTOR_SUCCESS:
-      return {
-        ...state,
+      return state.merge({
+        deleted: null,
+        previous: null,
         selectedMentor: payload
-      };
+      });
+
 
     case SIGN_OUT_SUCCESS:
       return new MentorsState();
