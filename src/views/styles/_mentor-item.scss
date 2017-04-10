@@ -101,7 +101,7 @@
   }
 
   .mentor-item--completed & {
-    color: #666;
+    color: #00FF00;
   }
 
   .mentor-item--completed &:after {
@@ -122,7 +122,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   font-size: 70%;
-  
+
 
   &:after {
     position: absolute;
@@ -131,11 +131,11 @@
     width: 0;
     height: 46%;
     content: '';
-    
+
   }
 
   .mentor-item--completed & {
-    color: #666;
+    color: #00FF00;
   }
 
   .mentor-item--completed &:after {

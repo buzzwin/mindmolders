@@ -106,6 +106,11 @@ class MentorItem extends Component {
         ref={c => this.titleText = c}
         tabIndex="0">{mentor.organization}
         </div>
+        <div
+        className="mentor-item__position"
+        ref={c => this.titleText = c}
+        tabIndex="0">{mentor.days}
+        </div>
       </div>
     );
   }
