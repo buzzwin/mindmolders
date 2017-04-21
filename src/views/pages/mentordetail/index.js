@@ -20,33 +20,67 @@ export class MentorDetail extends Component {
   }
 
   componentWillUnmount() {
-
   }
+
   gotoList() {
     const { router } = this.context;
     router.replace(paths.ROOT);
   }
 
-  render() {
+  renderMentor(mentor){
+    return(
+      <ul>
+        <li>
+        {mentor.title}
+        </li>
+        <li>
+        {mentor.organization}
+        </li>
+        <li>
+        {mentor.position}
+        </li>
+      </ul>
+    );
+  }
 
-
+  renderMentorInput(mentor) {
     return (
+    <div>
+      <input
+        autoComplete="off"
+        autoFocus
+        className="mentor-item__input"
+        defaultValue={mentor.title}
+        maxLength="64"
+        onBlur={this.saveTitle}
+        onKeyUp={this.onKeyUp}
+        ref={c => this.titleInput = c}
+        type="text"
+      />
+      <input
+        autoComplete="off"
+        autoFocus
+        className="mentor-item__input"
+        defaultValue={mentor.position}
+        maxLength="64"
+        onBlur={this.savePosition}
+        onKeyUp={this.onKeyUp}
+        ref={c => this.positionInput = c}
+        type="text"
+      />
+     </div>
+    );
+  }
 
+  render() {
+    return (
       <div className="g-row">
-
       <h1>Mentor Details</h1>
+      <div>
+      {this.renderMentor(this.props.selectedMentor)}
+      </div>
         <div>
-          <ul>
-            <li>
-            {this.props.selectedMentor.title}
-            </li>
-            <li>
-            {this.props.selectedMentor.organization}
-            </li>
-            <li>
-            {this.props.selectedMentor.position}
-            </li>
-          </ul>
+
         </div>
         <button className="btn sign-in__button" onClick={() => this.gotoList()}>Back To List </button>
       </div>

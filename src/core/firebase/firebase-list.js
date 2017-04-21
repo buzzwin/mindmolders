@@ -49,9 +49,6 @@ export class FirebaseList {
     let initialized = false;
     let list = [];
 
-
-
-
     ref.once('value', () => {
       initialized = true;
       emit(this._actions.onLoad(list));

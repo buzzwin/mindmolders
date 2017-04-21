@@ -4,14 +4,15 @@ import SignIn from './pages/sign-in';
 import Tasks from './pages/tasks';
 import Mentors from './pages/mentors';
 import MentorDetail from './pages/mentordetail';
-
+import MentorProfile from './pages/mentorprofile';
 
 export const paths = {
   ROOT: '/',
   SIGN_IN: '/sign-in',
   TASKS: '/',
   MENTORS: '/',
-  MENTORDETAIL: '/mentordetail'
+  MENTORDETAIL: '/mentordetail',
+  MENTORPROFILE: '/mentorprofile'
 };
 
 
@@ -56,7 +57,11 @@ export const getRoutes = getState => {
       {
         path: paths.MENTORDETAIL,
         component: MentorDetail
-      }
+      },
+      {
+        path: paths.MENTORPROFILE,
+        component: MentorProfile
+      },
     ]
   };
 };

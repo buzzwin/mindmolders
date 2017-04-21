@@ -8,7 +8,7 @@ import { getMentorFilter, getVisibleMentors, mentorsActions } from 'src/core/men
 import Notification from '../../components/notification';
 import MentorFilters from '../../components/mentor-filters';
 import MentorList from '../../components/mentor-list';
-
+import MentorForm from '../../components/mentor-form';
 
 export class Mentors extends Component {
   static propTypes = {
@@ -61,7 +61,7 @@ export class Mentors extends Component {
     return (
       <div className="g-row">
         <div className="g-col">
-           {/* <MentorForm createMentor={this.props.createMentor} /> */}
+           <MentorForm createMentor={this.props.createMentor} />
         </div>
 
         <div className="g-col">

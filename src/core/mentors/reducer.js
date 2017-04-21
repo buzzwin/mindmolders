@@ -10,7 +10,9 @@ import {
   FILTER_MENTORS,
   LOAD_MENTORS_SUCCESS,
   UPDATE_MENTOR_SUCCESS,
-  SHOW_DETAIL_MENTOR_SUCCESS
+  SHOW_DETAIL_MENTOR_SUCCESS,
+  FETCH_MENTOR_PROFILE_SUCCESS,
+  FETCH_MENTOR_PROFILE_PENDING
 } from './action-types';
 
 
@@ -20,7 +22,9 @@ export const MentorsState = new Record({
   list: new List(),
   previous: null,
   showDetails: false,
-  selectedMentor: null
+  selectedMentor: null,
+  mentorProfile: null,
+  fetching: false
 });
 
 
@@ -62,7 +66,13 @@ export function mentorsReducer(state = new MentorsState(), {payload, type}) {
         previous: null,
         selectedMentor: payload
       });
-
+      case FETCH_MENTOR_PROFILE_SUCCESS:
+      {
+        var newState = state.set('mentorProfile', payload);
+      return newState;
+      }
+      case FETCH_MENTOR_PROFILE_PENDING:
+        return state.set('fetching', true);
 
     case SIGN_OUT_SUCCESS:
       return new MentorsState();

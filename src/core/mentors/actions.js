@@ -1,6 +1,8 @@
 import { getDeletedMentor } from './selectors';
 import { mentorList } from './mentor-list';
 import { firebaseDb } from '../firebase/firebase';
+import {getAnyObject} from '../firebase/firebase-joins'
+
 
 
 import {
@@ -14,11 +16,14 @@ import {
   UNLOAD_MENTORS_SUCCESS,
   UPDATE_MENTOR_ERROR,
   UPDATE_MENTOR_SUCCESS,
-  SHOW_DETAIL_MENTOR_SUCCESS
+  SHOW_DETAIL_MENTOR_SUCCESS,
+  FETCH_MENTOR_PROFILE_SUCCESS,
+  FETCH_MENTOR_PROFILE_ERROR,
+  FETCH_MENTOR_PROFILE_PENDING
 } from './action-types';
 
 
-export function createMentor(title, position, organization) {
+export function createMentor1(title, position, organization) {
   return (dispatch, getState) => {
     const { auth } = getState();
     mentorList.push({userUID: auth.id, completed: false, title, position, organization})
@@ -26,10 +31,13 @@ export function createMentor(title, position, organization) {
   };
 }
 
-export function createMentorBackup(title, position, organization) {
+export function createMentor(title, position, organization) {
   return (dispatch, getState) => {
     const { auth } = getState();
-    firebaseDb.ref('mentors').set({
+    const path   = "mentors";
+    const key = auth.id;
+    console.log(path);
+    firebaseDb.ref(`${path}/${key}`).set({
       userUID: auth.id,
       title: title,
       position: position,
@@ -150,4 +158,29 @@ export function showDetails(mentor) {
     type: SHOW_DETAIL_MENTOR_SUCCESS,
     payload: mentor
   };
+}
+export function fetchMentorProfileSuccess(mentorProfile) {
+  return {
+    type: FETCH_MENTOR_PROFILE_SUCCESS,
+    payload: mentorProfile
+  };
+}
+export function fetchMentorProfilePending() {
+  return {
+    type: FETCH_MENTOR_PROFILE_PENDING
+  };
+}
+
+export function fetchMentorProfile(key) {
+  var  path = "mentors/" + key
+  return dispatch => {
+    dispatch(fetchMentorProfilePending())
+    return firebaseDb.ref(path).once('value', snap => {
+      var mentorProfile = snap.val();
+      dispatch(fetchMentorProfileSuccess(mentorProfile))
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  }
 }
