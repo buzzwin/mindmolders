@@ -28,8 +28,9 @@ function MentorList({deleteMentor, mentors, showDetails, updateMentor}) {
 MentorList.propTypes = {
   deleteMentor: PropTypes.func.isRequired,
   mentors: PropTypes.instanceOf(List).isRequired,
-  updateMentor: PropTypes.func.isRequired,
-  showDetails: PropTypes.func.isRequired
+  showDetails: PropTypes.func.isRequired,
+  updateMentor: PropTypes.func.isRequired
+
 
 };
 

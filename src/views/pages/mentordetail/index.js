@@ -4,9 +4,7 @@ import { paths } from '../../routes';
 
 export class MentorDetail extends Component {
 
-  constructor(props, context) {
-    super(props, context);
-  }
+
 
   static propTypes = {
     selectedMentor: PropTypes.object.isRequired,
@@ -15,6 +13,9 @@ export class MentorDetail extends Component {
   static contextTypes = {
     router: React.PropTypes.object.isRequired
   };
+  constructor(props, context) {
+    super(props, context);
+  }
 
   componentWillMount() {
   }
@@ -27,8 +28,8 @@ export class MentorDetail extends Component {
     router.replace(paths.ROOT);
   }
 
-  renderMentor(mentor){
-    return(
+  renderMentor(mentor) {
+    return (
       <ul>
         <li>
         {mentor.title}

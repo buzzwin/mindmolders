@@ -61,7 +61,7 @@ export const getRoutes = getState => {
       {
         path: paths.MENTORPROFILE,
         component: MentorProfile
-      },
+      }
     ]
   };
 };

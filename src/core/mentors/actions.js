@@ -1,7 +1,7 @@
 import { getDeletedMentor } from './selectors';
 import { mentorList } from './mentor-list';
 import { firebaseDb } from '../firebase/firebase';
-import {getAnyObject} from '../firebase/firebase-joins'
+
 
 
 
@@ -18,8 +18,8 @@ import {
   UPDATE_MENTOR_SUCCESS,
   SHOW_DETAIL_MENTOR_SUCCESS,
   FETCH_MENTOR_PROFILE_SUCCESS,
-  FETCH_MENTOR_PROFILE_ERROR,
-  FETCH_MENTOR_PROFILE_PENDING
+  FETCH_MENTOR_PROFILE_PENDING,
+  FETCH_MENTOR_PROFILE_ERROR
 } from './action-types';
 
 
@@ -34,9 +34,8 @@ export function createMentor1(title, position, organization) {
 export function createMentor(title, position, organization) {
   return (dispatch, getState) => {
     const { auth } = getState();
-    const path   = "mentors";
+    const path = 'mentors';
     const key = auth.id;
-    console.log(path);
     firebaseDb.ref(`${path}/${key}`).set({
       userUID: auth.id,
       title: title,
@@ -113,8 +112,6 @@ export function updateMentor(mentor, changes) {
   };
 }
 
-
-
 export function updateMentorSuccess(mentor) {
   return {
     type: UPDATE_MENTOR_SUCCESS,
@@ -122,15 +119,12 @@ export function updateMentorSuccess(mentor) {
   };
 }
 
-
 export function loadMentorsSuccess(mentors) {
   return {
     type: LOAD_MENTORS_SUCCESS,
     payload: mentors
   };
 }
-
-
 
 export function filterMentors(filterType) {
   return {
@@ -165,6 +159,12 @@ export function fetchMentorProfileSuccess(mentorProfile) {
     payload: mentorProfile
   };
 }
+export function fetchMentorProfileError(error) {
+  return {
+    type: FETCH_MENTOR_PROFILE_ERROR,
+    payload: error
+  };
+}
 export function fetchMentorProfilePending() {
   return {
     type: FETCH_MENTOR_PROFILE_PENDING
@@ -172,15 +172,15 @@ export function fetchMentorProfilePending() {
 }
 
 export function fetchMentorProfile(key) {
-  var  path = "mentors/" + key
+  var path = 'mentors/' + key;
   return dispatch => {
-    dispatch(fetchMentorProfilePending())
+    dispatch(fetchMentorProfilePending());
     return firebaseDb.ref(path).once('value', snap => {
       var mentorProfile = snap.val();
-      dispatch(fetchMentorProfileSuccess(mentorProfile))
+      dispatch(fetchMentorProfileSuccess(mentorProfile));
     })
-    .catch((error) => {
-      console.log(error);
+    .catch(error => {
+      dispatch(fetchMentorProfileError(error));
     });
-  }
+  };
 }

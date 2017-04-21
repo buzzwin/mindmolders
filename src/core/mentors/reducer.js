@@ -66,13 +66,13 @@ export function mentorsReducer(state = new MentorsState(), {payload, type}) {
         previous: null,
         selectedMentor: payload
       });
-      case FETCH_MENTOR_PROFILE_SUCCESS:
+    case FETCH_MENTOR_PROFILE_SUCCESS:
       {
         var newState = state.set('mentorProfile', payload);
-      return newState;
+        return newState;
       }
-      case FETCH_MENTOR_PROFILE_PENDING:
-        return state.set('fetching', true);
+    case FETCH_MENTOR_PROFILE_PENDING:
+      return state.set('fetching', true);
 
     case SIGN_OUT_SUCCESS:
       return new MentorsState();

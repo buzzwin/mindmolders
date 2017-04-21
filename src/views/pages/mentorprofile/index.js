@@ -1,42 +1,45 @@
-import { List, Map, Record } from 'immutable';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { createSelector } from 'reselect';
-
-import { getNotification, notificationActions } from 'src/core/notification';
-import { getMentorFilter, getVisibleMentors, mentorsActions } from 'src/core/mentors';
-import Notification from '../../components/notification';
-import MentorFilters from '../../components/mentor-filters';
-import MentorList from '../../components/mentor-list';
-import MentorForm from '../../components/mentor-form';
-import MentorItem from '../../components/mentor-item';
+import {mentorsActions } from 'src/core/mentors';
 import MentorProfileItem from '../../components/mentor-profile-item';
+import { paths } from '../../routes';
 
 export class MentorProfile extends Component {
-  constructor(props) {
-    super(props);
+  static contextTypes = {
+    router: React.PropTypes.object.isRequired
+  };
+  constructor(props, context) {
+    super(props, context);
     this.state = {fetched: false};
   }
+
   static propTypes = {
+    auth: PropTypes.object.isRequired,
+    mentorProfile: PropTypes.object.isRequired,
     fetchMentorProfile: PropTypes.func.isRequired,
     createMentor: PropTypes.func.isRequired,
     deleteMentor: PropTypes.func.isRequired,
     updateMentor: PropTypes.func.isRequired,
-    showDetails: PropTypes.func.isRequired
+    showDetails: PropTypes.func.isRequired,
+    goBack: PropTypes.func.isRequired
   };
 
   componentWillMount() {
-    this.props.fetchMentorProfile(this.props.auth.id)
+    this.props.fetchMentorProfile(this.props.auth.id);
+  }
+  gotoList() {
+    const { router } = this.context;
+    router.replace(paths.ROOT);
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps() {
     this.setState({ fetched: !this.state.fetched });
   }
-  componentWillUnmount() {
 
+  componentWillUnmount() {
   }
 
-  renderMentor(mentor, deleteMentor, index, updateMentor, showDetails){
+  renderMentor(mentor, deleteMentor, index, updateMentor, showDetails) {
     if (mentor) {
       return (
         <MentorProfileItem
@@ -107,15 +110,15 @@ export class MentorProfile extends Component {
 
 function mapStateToProps(state, ownProps) {
   return {
+    auth: state.auth,
     mentorProfile: state.mentors.mentorProfile,
-    auth: state.auth
+    goBack: ownProps.history.replace
   };
 }
 
 const mapDispatchToProps = Object.assign(
   {},
   mentorsActions,
-  notificationActions
 );
 
 export default connect(

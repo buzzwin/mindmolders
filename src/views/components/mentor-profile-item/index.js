@@ -1,6 +1,5 @@
 import classNames from 'classnames';
 import React, { Component, PropTypes } from 'react';
-import { Mentor } from 'src/core/mentors';
 import { paths } from '../../routes';
 
 class MentorProfileItem extends Component {
@@ -91,25 +90,25 @@ class MentorProfileItem extends Component {
     return (
       <div>
         <div
-        className="mentor-item__title"
-        ref={c => this.titleText = c}
-        tabIndex="0">{mentor.title}
+          className="mentor-item__title"
+          ref={c => this.titleText = c}
+          tabIndex="0">{mentor.title}
         </div>
         &nbsp;
         <div
-        className="mentor-item__position"
-        ref={c => this.titleText = c}
-        tabIndex="0">{mentor.position}
+          className="mentor-item__position"
+          ref={c => this.titleText = c}
+          tabIndex="0">{mentor.position}
         </div>
         <div
-        className="mentor-item__position"
-        ref={c => this.titleText = c}
-        tabIndex="0">{mentor.organization}
+          className="mentor-item__position"
+          ref={c => this.titleText = c}
+          tabIndex="0">{mentor.organization}
         </div>
         <div
-        className="mentor-item__position"
-        ref={c => this.titleText = c}
-        tabIndex="0">{mentor.days}
+          className="mentor-item__position"
+          ref={c => this.titleText = c}
+          tabIndex="0">{mentor.days}
         </div>
       </div>
     );
@@ -193,7 +192,7 @@ class MentorProfileItem extends Component {
             ref={c => this.detailsButton = c}
             type="button">
             <svg className="icon" width="40" height="40" viewBox="0 0 40 40">
-            <path d="m25.9 30.7v-3.6q0-0.3-0.2-0.5t-0.6-0.2h-2.1v-11.4q0-0.3-0.2-0.5t-0.5-0.2h-7.2q-0.3 0-0.5 0.2t-0.2 0.5v3.6q0 0.3 0.2 0.5t0.5 0.2h2.2v7.1h-2.2q-0.3 0-0.5 0.2t-0.2 0.5v3.6q0 0.3 0.2 0.5t0.5 0.2h10q0.4 0 0.6-0.2t0.2-0.5z m-2.9-20v-3.6q0-0.3-0.2-0.5t-0.5-0.2h-4.3q-0.3 0-0.5 0.2t-0.2 0.5v3.6q0 0.3 0.2 0.5t0.5 0.2h4.3q0.3 0 0.5-0.2t0.2-0.5z m14.3 9.3q0 4.7-2.3 8.6t-6.3 6.2-8.6 2.3-8.6-2.3-6.2-6.2-2.3-8.6 2.3-8.6 6.2-6.2 8.6-2.3 8.6 2.3 6.3 6.2 2.3 8.6z"></path>
+                <path d="m25.9 30.7v-3.6q0-0.3-0.2-0.5t-0.6-0.2h-2.1v-11.4q0-0.3-0.2-0.5t-0.5-0.2h-7.2q-0.3 0-0.5 0.2t-0.2 0.5v3.6q0 0.3 0.2 0.5t0.5 0.2h2.2v7.1h-2.2q-0.3 0-0.5 0.2t-0.2 0.5v3.6q0 0.3 0.2 0.5t0.5 0.2h10q0.4 0 0.6-0.2t0.2-0.5z m-2.9-20v-3.6q0-0.3-0.2-0.5t-0.5-0.2h-4.3q-0.3 0-0.5 0.2t-0.2 0.5v3.6q0 0.3 0.2 0.5t0.5 0.2h4.3q0.3 0 0.5-0.2t0.2-0.5z m14.3 9.3q0 4.7-2.3 8.6t-6.3 6.2-8.6 2.3-8.6-2.3-6.2-6.2-2.3-8.6 2.3-8.6 6.2-6.2 8.6-2.3 8.6 2.3 6.3 6.2 2.3 8.6z"></path>
             </svg>
           </button>
 
