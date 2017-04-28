@@ -30,6 +30,7 @@
   "dependencies": {
     "babel-polyfill": "~6.13.0",
     "classnames": "~2.2.5",
+    "cross-env": "^3.0.0",
     "immutable": "~3.8.1",
     "react": "~15.3.2",
     "react-dom": "~15.3.2",
