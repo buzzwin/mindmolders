@@ -8,10 +8,6 @@ export class MentorProfile extends Component {
   static contextTypes = {
     router: React.PropTypes.object.isRequired
   };
-  constructor(props, context) {
-    super(props, context);
-    this.state = {fetched: false};
-  }
 
   static propTypes = {
     auth: PropTypes.object.isRequired,
@@ -23,6 +19,11 @@ export class MentorProfile extends Component {
     showDetails: PropTypes.func.isRequired,
     goBack: PropTypes.func.isRequired
   };
+
+  constructor(props, context) {
+    super(props, context);
+    this.state = {fetched: false};
+  }
 
   componentWillMount() {
     this.props.fetchMentorProfile(this.props.auth.id);
@@ -82,27 +83,20 @@ export class MentorProfile extends Component {
        </div>
       );
     }
-
   }
 
   render() {
     return (
       <div className="g-row">
       <h1>My Profile</h1>
-      <div>
-      {this.renderMentor(this.props.mentorProfile, this.props.deleteMentor, 1, this.props.updateMentor, this.props.showDetails)}
-      </div>
         <div>
-
+          {this.renderMentor(this.props.mentorProfile, this.props.deleteMentor, 1, this.props.updateMentor, this.props.showDetails)}
         </div>
         <button className="btn sign-in__button" onClick={() => this.gotoList()}>Back To List </button>
       </div>
     );
   }
 }
-
-
-
 
 //=====================================
 //  CONNECT
